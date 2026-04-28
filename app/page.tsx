@@ -50,15 +50,33 @@ const MATERIAIS_DESENHO = [
   "papel rasgado e remontado",
 ];
 
-const MATERIAIS_HIBRIDO = [
+const MATERIAIS_ARTESVISUAIS = [
+  "tinta acrílica aplicada com espátula",
+  "tinta guache misturada com areia",
+  "aquarela e nanquim na mesma folha",
   "colagem com recortes de revistas antigas",
+  "impressão em xilogravura sobre tecido",
+  "tela crua preparada com gesso e pigmento",
   "assemblagem de objetos descartados",
-  "folhas secas como superfície e pigmento",
-  "terra misturada com cola e pigmento",
-  "pedra como ferramenta para gravar",
-  "madeira riscada com prego e depois tingida",
+  "fotografia analógica revelada à mão",
+  "serigrafia com tinta caseira",
+  "monotipia com rolo e tinta offset",
+  "intervenção em fotografia impressa",
+  "mosaico com fragmentos de cerâmica e vidro",
+];
+
+const MATERIAIS_CRAZY = [
+  "bala mastigada como escultura",
+  "café derramado como aquarela",
+  "terra molhada modelada no chão",
+  "plástico derretido com isqueiro",
+  "folhas de árvore costuradas com linha",
+  "espelho partido remontado em novo formato",
+  "jornal dobrado e pintado por cima",
+  "areia colorida sobre superfície com cola",
   ...MATERIAIS_CERAMICA,
   ...MATERIAIS_DESENHO,
+  ...MATERIAIS_ARTESVISUAIS,
 ];
 
 const RESTRICOES_INICIANTE = [
@@ -124,7 +142,7 @@ const INTENCOES = [
 
 // ─── TIPOS ────────────────────────────────────────────────────────────────────
 
-type Foco = "ceramica" | "desenho" | "hibrido";
+type Foco = "artesvisuais" | "ceramica" | "desenho" | "crazy";
 type Duracao = "rapido" | "projeto" | "tecnico";
 type Nivel = "iniciante" | "intermediario" | "avancado";
 
@@ -141,9 +159,10 @@ function rand<T>(lista: T[]): T {
 }
 
 function getMateriais(foco: Foco) {
+  if (foco === "artesvisuais") return MATERIAIS_ARTESVISUAIS;
   if (foco === "ceramica") return MATERIAIS_CERAMICA;
   if (foco === "desenho") return MATERIAIS_DESENHO;
-  return MATERIAIS_HIBRIDO;
+  return MATERIAIS_CRAZY;
 }
 
 function getRestricoes(nivel: Nivel) {
@@ -213,7 +232,7 @@ export default function ARTbotPage() {
   const [reflexoes, setReflexoes] = useState<string[]>([]);
   const [copiado, setCopiado] = useState(false);
   const [animKey, setAnimKey] = useState(0);
-  const [foco, setFoco] = useState<Foco>("hibrido");
+  const [foco, setFoco] = useState<Foco>("artesvisuais");
   const [duracao, setDuracao] = useState<Duracao>("rapido");
   const [nivel, setNivel] = useState<Nivel>("intermediario");
 
@@ -440,9 +459,9 @@ export default function ARTbotPage() {
               <div style={{ marginBottom: 18 }}>
                 <p style={{ ...S.label, color: S.laranja, textTransform: "uppercase", marginBottom: 8 }}>Foco</p>
                 <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
-                  {(["ceramica","desenho","hibrido"] as Foco[]).map(f => (
+                  {(["artesvisuais","ceramica","desenho","crazy"] as Foco[]).map(f => (
                     <button key={f} style={btnFiltro(foco === f, S.laranja)} onClick={() => setFoco(f)}>
-                      {f === "ceramica" ? "Cerâmica" : f === "desenho" ? "Desenho" : "Híbrido"}
+                      {f === "artesvisuais" ? "Artes Visuais" : f === "ceramica" ? "Cerâmica" : f === "desenho" ? "Desenho" : "Crazy"}
                     </button>
                   ))}
                 </div>
