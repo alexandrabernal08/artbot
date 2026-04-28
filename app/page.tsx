@@ -460,22 +460,6 @@ export default function ARTbotPage() {
                 </div>
               </div>
 
-              {/* Botão gerar */}
-              <button onClick={handleGerar}
-                style={{ width: "100%", padding: "14px 0", background: S.grad, color: "#FFFFFF", border: "none", borderRadius: 10, fontSize: "0.9rem", fontWeight: 700, letterSpacing: "0.08em", cursor: "pointer", fontFamily: "Georgia, serif", transition: "opacity 0.2s", textShadow: "0 1px 2px rgba(0,0,0,0.2)" }}
-                onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")}
-                onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
-              >
-                Gerar desafio ✦
-              </button>
-
-              {desafio && (
-                <button onClick={handleGerar}
-                  style={{ width: "100%", padding: "10px 0", backgroundColor: "transparent", color: S.suave, border: `1px solid ${S.borda}`, borderRadius: 10, fontSize: "0.8rem", cursor: "pointer", marginTop: 8, fontFamily: "Georgia, serif" }}>
-                  ↺ Limpar e gerar novo
-                </button>
-              )}
-
               {/* Crédito pedagógico */}
               <div style={{ marginTop: 20, paddingTop: 16, borderTop: `1px solid ${S.borda}` }}>
                 <p style={{ color: S.suave, fontSize: "0.65rem", lineHeight: 1.7, textAlign: "center", fontStyle: "italic" }}>
