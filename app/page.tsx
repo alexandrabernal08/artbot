@@ -314,7 +314,7 @@ export default function ARTbotPage() {
               {!desafio ? (
                 <div style={{ padding: 48, textAlign: "center" }}>
                   <p style={{ color: S.suave, fontSize: "1.1rem", fontStyle: "italic", lineHeight: 1.8 }}>
-                    Todo desafio é um convite.<br/>Clique em &ldquo;Gerar desafio&rdquo; para começar.
+                    Um desafio pode ser um convite para sair do lugar comum.
                   </p>
                 </div>
               ) : (
