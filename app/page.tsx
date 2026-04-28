@@ -313,9 +313,16 @@ export default function ARTbotPage() {
 
               {!desafio ? (
                 <div style={{ padding: 48, textAlign: "center" }}>
-                  <p style={{ color: S.suave, fontSize: "1.1rem", fontStyle: "italic", lineHeight: 1.8 }}>
+                  <p style={{ color: S.suave, fontSize: "1.1rem", fontStyle: "italic", lineHeight: 1.8, marginBottom: 28 }}>
                     Um desafio pode ser um convite para sair do lugar comum.
                   </p>
+                  <button onClick={handleGerar}
+                    style={{ padding: "14px 32px", background: S.grad, color: "#FFFFFF", border: "none", borderRadius: 10, fontSize: "0.95rem", fontWeight: 700, letterSpacing: "0.08em", cursor: "pointer", fontFamily: "Georgia, serif", textShadow: "0 1px 2px rgba(0,0,0,0.2)" }}
+                    onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")}
+                    onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
+                  >
+                    Gerar desafio ✦
+                  </button>
                 </div>
               ) : (
                 <div style={{ padding: "28px 28px 0 28px" }}>
