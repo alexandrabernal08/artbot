@@ -250,45 +250,50 @@ export default function ARTbotPage() {
 
   // Estilos reutilizáveis
   const S = {
-    bg: "#FAF7F2", card: "#FFFFFF", borda: "#DDD1C8",
-    marrom: "#3A2008", medio: "#634B3C", suave: "#A08070",
-    oliva: "#B1B209", terracota: "#C87941", dourado: "#C8A96E",
+    bg: "#F8F9FF", card: "#FFFFFF", borda: "#E0E0F0",
+    texto: "#1A1A2E", medio: "#4A4A6A", suave: "#9090B0",
+    vermelho: "#FF5252", laranja: "#FF9500", amarelo: "#FFC300",
+    verde: "#06D6A0", azul: "#118AB2", roxo: "#9B5DE5", rosa: "#F15BB5",
+    grad: "linear-gradient(90deg, #FF5252, #FF9500, #FFC300, #06D6A0, #118AB2, #9B5DE5)",
     label: { fontSize: "0.6rem", letterSpacing: "0.12em", fontWeight: 700 } as React.CSSProperties,
   };
 
-  const btnFiltro = (ativo: boolean): React.CSSProperties => ({
+  const btnFiltro = (ativo: boolean, cor = S.azul): React.CSSProperties => ({
     padding: "6px 14px", borderRadius: 8, fontSize: "0.8rem", cursor: "pointer",
-    border: `1.5px solid ${ativo ? S.marrom : S.borda}`,
-    backgroundColor: ativo ? S.marrom : S.bg,
+    border: `1.5px solid ${ativo ? cor : S.borda}`,
+    backgroundColor: ativo ? cor : S.card,
     color: ativo ? "#FFFFFF" : S.medio,
     fontWeight: ativo ? 700 : 400,
     transition: "all 0.15s",
   });
 
   const elementoIcone = [
-    { label: "VERBO DE AÇÃO", icon: <IconVerbo />, cor: "#C87941" },
-    { label: "MATERIAL / TÉCNICA", icon: <IconMaterial />, cor: "#B1B209" },
-    { label: "RESTRIÇÃO CRIATIVA", icon: <IconRestricao />, cor: "#A08070" },
-    { label: "REFERÊNCIA ARTÍSTICA", icon: <IconReferencia />, cor: "#9B6B9B" },
-    { label: "INTENÇÃO POÉTICA", icon: <IconIntencao />, cor: "#C87941" },
+    { label: "VERBO DE AÇÃO",        icon: <IconVerbo />,      cor: S.vermelho },
+    { label: "MATERIAL / TÉCNICA",   icon: <IconMaterial />,   cor: S.laranja  },
+    { label: "RESTRIÇÃO CRIATIVA",   icon: <IconRestricao />,  cor: S.verde    },
+    { label: "REFERÊNCIA ARTÍSTICA", icon: <IconReferencia />, cor: S.azul     },
+    { label: "INTENÇÃO POÉTICA",     icon: <IconIntencao />,   cor: S.roxo     },
   ];
 
   return (
     <div style={{ backgroundColor: S.bg, minHeight: "100vh", fontFamily: "Georgia, 'Times New Roman', serif" }}>
 
       {/* HEADER */}
-      <header style={{ backgroundColor: S.marrom, borderBottom: `1px solid #4A3020` }}
+      <header style={{ backgroundColor: S.card, borderBottom: `4px solid transparent`, borderImage: `${S.grad} 1` }}
         className="px-6 py-4 flex items-center justify-between">
         <div>
-          <div className="flex items-center gap-2">
-            <span style={{ color: S.oliva, fontSize: "1.4rem", fontWeight: 700, letterSpacing: "0.15em" }}>ART</span>
-            <span style={{ color: "#FFFFFF", fontSize: "1.4rem", fontWeight: 300, letterSpacing: "0.15em" }}>bot</span>
+          <div className="flex items-center gap-1">
+            {"ART".split("").map((letra, i) => {
+              const cores = [S.vermelho, S.laranja, S.amarelo];
+              return <span key={i} style={{ color: cores[i], fontSize: "1.5rem", fontWeight: 900, letterSpacing: "0.1em" }}>{letra}</span>;
+            })}
+            <span style={{ color: S.azul, fontSize: "1.5rem", fontWeight: 300, letterSpacing: "0.1em" }}>bot</span>
           </div>
-          <p style={{ color: S.suave, fontSize: "0.65rem", letterSpacing: "0.1em", marginTop: 2 }}>
+          <p style={{ color: S.suave, fontSize: "0.65rem", letterSpacing: "0.12em", marginTop: 2 }}>
             GERADOR DE DESAFIOS CRIATIVOS
           </p>
         </div>
-        <p style={{ color: "#C4BAB0", fontSize: "0.7rem", fontStyle: "italic", textAlign: "right", maxWidth: 200, lineHeight: 1.5 }}>
+        <p style={{ color: S.suave, fontSize: "0.7rem", fontStyle: "italic", textAlign: "right", maxWidth: 200, lineHeight: 1.5 }}>
           Investigação. Transformação.<br/>Arte. Criação Autoral.
         </p>
       </header>
@@ -299,12 +304,12 @@ export default function ARTbotPage() {
 
           {/* COLUNA ESQUERDA — Desafio */}
           <div className="flex-1">
-            <h2 style={{ color: S.marrom, fontSize: "1.1rem", marginBottom: 16, fontWeight: 400 }}>
+            <h2 style={{ color: S.texto, fontSize: "1.1rem", marginBottom: 16, fontWeight: 400 }}>
               Seu desafio artístico ✦
             </h2>
 
             {/* CARD DO DESAFIO */}
-            <div key={animKey} style={{ backgroundColor: S.card, border: `1px solid ${S.borda}`, borderRadius: 16, overflow: "hidden", marginBottom: 16 }}>
+            <div key={animKey} style={{ backgroundColor: S.card, border: `1px solid ${S.borda}`, borderRadius: 16, overflow: "hidden", marginBottom: 16, borderTop: `4px solid transparent`, borderImage: `${S.grad} 1` }}>
 
               {!desafio ? (
                 <div style={{ padding: 48, textAlign: "center" }}>
@@ -325,31 +330,27 @@ export default function ARTbotPage() {
                   </div>
 
                   {/* Texto principal do desafio */}
-                  <p style={{ fontSize: "clamp(1.1rem, 2.5vw, 1.35rem)", lineHeight: 1.9, color: S.marrom, marginBottom: 24 }}>
-                    <span style={{ color: S.terracota, fontStyle: "italic", fontWeight: 700 }}>
+                  <p style={{ fontSize: "clamp(1.1rem, 2.5vw, 1.35rem)", lineHeight: 1.9, color: S.texto, marginBottom: 24 }}>
+                    <span style={{ color: S.vermelho, fontStyle: "italic", fontWeight: 700 }}>
                       {desafio.verbo.charAt(0).toUpperCase() + desafio.verbo.slice(1)}
                     </span>
-                    {" e "}
-                    <span style={{ color: S.terracota, fontStyle: "italic", fontWeight: 700 }}>
-                      {rand(VERBOS)}
-                    </span>
                     {" "}
-                    <span style={{ color: S.medio }}>
+                    <span style={{ color: S.laranja }}>
                       {desafio.material},
                     </span>
                     <br />
-                    <span style={{ color: S.oliva }}>
+                    <span style={{ color: S.verde }}>
                       {desafio.restricao},
                     </span>
                     <br />
                     <span style={{ color: S.medio }}>inspirado em </span>
-                    <span style={{ color: "#9B6B9B", fontStyle: "italic" }}>
+                    <span style={{ color: S.azul, fontStyle: "italic" }}>
                       {desafio.referencia}
                     </span>
                     <span style={{ color: S.medio }}>,</span>
                     <br />
                     <span style={{ color: S.medio }}>para investigar a ideia de </span>
-                    <span style={{ color: S.marrom, fontWeight: 700 }}>
+                    <span style={{ color: S.roxo, fontWeight: 700 }}>
                       {desafio.intencao}
                     </span>
                     <span style={{ color: S.medio }}>.</span>
@@ -358,13 +359,13 @@ export default function ARTbotPage() {
                   {/* Metadados */}
                   <div style={{ borderTop: `1px solid ${S.borda}`, padding: "12px 0", display: "flex", gap: 20, flexWrap: "wrap" }}>
                     <span style={{ color: S.suave, fontSize: "0.78rem", display: "flex", alignItems: "center", gap: 6 }}>
-                      ⏱ <strong style={{ color: S.medio }}>Duração:</strong> {desafio.duracao}
+                      ⏱ <strong style={{ color: S.azul }}>Duração:</strong> {desafio.duracao}
                     </span>
                     <span style={{ color: S.suave, fontSize: "0.78rem", display: "flex", alignItems: "center", gap: 6 }}>
-                      ◎ <strong style={{ color: S.medio }}>Formato:</strong> {desafio.formato}
+                      ◎ <strong style={{ color: S.laranja }}>Formato:</strong> {desafio.formato}
                     </span>
                     <span style={{ color: S.suave, fontSize: "0.78rem", display: "flex", alignItems: "center", gap: 6 }}>
-                      ◈ <strong style={{ color: S.medio }}>Nível:</strong> {nivel === "iniciante" ? "Iniciante" : nivel === "avancado" ? "Avançado" : "Intermediário"}
+                      ◈ <strong style={{ color: S.roxo }}>Nível:</strong> {nivel === "iniciante" ? "Iniciante" : nivel === "avancado" ? "Avançado" : "Intermediário"}
                     </span>
                   </div>
                 </div>
@@ -389,16 +390,19 @@ export default function ARTbotPage() {
             {/* PARA REFLETIR */}
             {desafio && reflexoes.length > 0 && (
               <div style={{ backgroundColor: S.card, border: `1px solid ${S.borda}`, borderRadius: 16, padding: 24 }}>
-                <h3 style={{ color: S.marrom, fontSize: "0.85rem", fontWeight: 700, marginBottom: 12, letterSpacing: "0.05em" }}>
+                <h3 style={{ color: S.texto, fontSize: "0.85rem", fontWeight: 700, marginBottom: 12, letterSpacing: "0.05em" }}>
                   Para refletir
                 </h3>
                 <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 8 }}>
-                  {reflexoes.map((r, i) => (
-                    <li key={i} style={{ color: S.medio, fontSize: "0.85rem", lineHeight: 1.6, display: "flex", gap: 8 }}>
-                      <span style={{ color: S.oliva, flexShrink: 0 }}>•</span>
-                      {r}
-                    </li>
-                  ))}
+                  {reflexoes.map((r, i) => {
+                    const pontinhos = [S.vermelho, S.laranja, S.verde, S.azul];
+                    return (
+                      <li key={i} style={{ color: S.medio, fontSize: "0.85rem", lineHeight: 1.6, display: "flex", gap: 8 }}>
+                        <span style={{ color: pontinhos[i % pontinhos.length], flexShrink: 0, fontWeight: 700 }}>•</span>
+                        {r}
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
             )}
@@ -409,16 +413,16 @@ export default function ARTbotPage() {
             <div style={{ backgroundColor: S.card, border: `1px solid ${S.borda}`, borderRadius: 16, padding: 24, position: "sticky", top: 24 }}>
 
               <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 20 }}>
-                <h3 style={{ color: S.marrom, fontSize: "0.9rem", fontWeight: 700 }}>Filtros</h3>
+                <h3 style={{ color: S.texto, fontSize: "0.9rem", fontWeight: 700 }}>Filtros</h3>
                 <span style={{ color: S.suave, fontSize: "1rem" }}>⚙</span>
               </div>
 
               {/* Duração */}
               <div style={{ marginBottom: 18 }}>
-                <p style={{ ...S.label, color: S.suave, textTransform: "uppercase", marginBottom: 8 }}>Duração</p>
+                <p style={{ ...S.label, color: S.azul, textTransform: "uppercase", marginBottom: 8 }}>Duração</p>
                 <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
                   {(["rapido","projeto","tecnico"] as Duracao[]).map(d => (
-                    <button key={d} style={btnFiltro(duracao === d)} onClick={() => setDuracao(d)}>
+                    <button key={d} style={btnFiltro(duracao === d, S.azul)} onClick={() => setDuracao(d)}>
                       {d === "rapido" ? "Rápido" : d === "projeto" ? "Projeto" : "Técnico"}
                     </button>
                   ))}
@@ -427,10 +431,10 @@ export default function ARTbotPage() {
 
               {/* Foco */}
               <div style={{ marginBottom: 18 }}>
-                <p style={{ ...S.label, color: S.suave, textTransform: "uppercase", marginBottom: 8 }}>Foco</p>
+                <p style={{ ...S.label, color: S.laranja, textTransform: "uppercase", marginBottom: 8 }}>Foco</p>
                 <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
                   {(["ceramica","desenho","hibrido"] as Foco[]).map(f => (
-                    <button key={f} style={btnFiltro(foco === f)} onClick={() => setFoco(f)}>
+                    <button key={f} style={btnFiltro(foco === f, S.laranja)} onClick={() => setFoco(f)}>
                       {f === "ceramica" ? "Cerâmica" : f === "desenho" ? "Desenho" : "Híbrido"}
                     </button>
                   ))}
@@ -439,10 +443,10 @@ export default function ARTbotPage() {
 
               {/* Nível */}
               <div style={{ marginBottom: 24 }}>
-                <p style={{ ...S.label, color: S.suave, textTransform: "uppercase", marginBottom: 8 }}>Nível</p>
+                <p style={{ ...S.label, color: S.roxo, textTransform: "uppercase", marginBottom: 8 }}>Nível</p>
                 <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
                   {(["iniciante","intermediario","avancado"] as Nivel[]).map(n => (
-                    <button key={n} style={btnFiltro(nivel === n)} onClick={() => setNivel(n)}>
+                    <button key={n} style={btnFiltro(nivel === n, S.roxo)} onClick={() => setNivel(n)}>
                       {n === "iniciante" ? "Iniciante" : n === "avancado" ? "Avançado" : "Intermediário"}
                     </button>
                   ))}
@@ -451,7 +455,7 @@ export default function ARTbotPage() {
 
               {/* Botão gerar */}
               <button onClick={handleGerar}
-                style={{ width: "100%", padding: "14px 0", backgroundColor: S.marrom, color: "#FFFFFF", border: "none", borderRadius: 10, fontSize: "0.9rem", letterSpacing: "0.08em", cursor: "pointer", fontFamily: "Georgia, serif", transition: "opacity 0.2s" }}
+                style={{ width: "100%", padding: "14px 0", background: S.grad, color: "#FFFFFF", border: "none", borderRadius: 10, fontSize: "0.9rem", fontWeight: 700, letterSpacing: "0.08em", cursor: "pointer", fontFamily: "Georgia, serif", transition: "opacity 0.2s", textShadow: "0 1px 2px rgba(0,0,0,0.2)" }}
                 onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")}
                 onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
               >
@@ -479,9 +483,13 @@ export default function ARTbotPage() {
       </div>
 
       {/* FOOTER */}
-      <footer style={{ borderTop: `1px solid ${S.borda}`, padding: "24px 16px", marginTop: 32, textAlign: "center" }}>
-        <p style={{ color: S.marrom, fontSize: "0.8rem", fontWeight: 700, letterSpacing: "0.1em" }}>
-          ARTbot — Gerador de Desafios Artísticos
+      <footer style={{ borderTop: `4px solid transparent`, borderImage: `${S.grad} 1`, padding: "24px 16px", marginTop: 32, textAlign: "center", backgroundColor: S.card }}>
+        <p style={{ fontSize: "0.8rem", fontWeight: 700, letterSpacing: "0.1em" }}>
+          {"ARTbot".split("").map((l, i) => {
+            const cores = [S.vermelho, S.laranja, S.amarelo, S.verde, S.azul, S.roxo];
+            return <span key={i} style={{ color: cores[i % cores.length] }}>{l}</span>;
+          })}
+          <span style={{ color: S.medio }}> — Gerador de Desafios Artísticos</span>
         </p>
         <p style={{ color: S.suave, fontSize: "0.7rem", marginTop: 4, fontStyle: "italic" }}>
           Barro na Veia · Escola de cerâmica · Uma ferramenta para provocar a criação, a investigação e a autoria.
