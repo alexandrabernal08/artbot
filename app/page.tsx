@@ -140,6 +140,72 @@ const INTENCOES = [
   "recomeço","o que sobra","o que falta","presença","mapa","território",
 ];
 
+// ─── MAPEAMENTOS MYP ──────────────────────────────────────────────────────────
+
+const VERBO_CRITERIO: Record<string, "A"|"B"|"C"|"D"> = {
+  // A — Knowing & Understanding
+  "investigar":"A","questionar":"A","mapear":"A","contextualizar":"A",
+  "documentar":"A","arquivar":"A","colecionar":"A","comparar":"A",
+  "interpretar":"A","situar":"A","reinterpretar":"A","ler":"A",
+  "narrar":"A","citar":"A","traduzir":"A","rastrear":"A","confrontar":"A",
+  // B — Developing Skills
+  "rasgar":"B","colar":"B","cortar":"B","amassar":"B","pressionar":"B",
+  "apertar":"B","alisar":"B","furar":"B","perfurar":"B","marcar":"B",
+  "riscar":"B","dobrar":"B","torcer":"B","esticar":"B","comprimir":"B",
+  "encaixar":"B","juntar":"B","separar":"B","empilhar":"B","equilibrar":"B",
+  "sobrepor":"B","entrelaçar":"B","costurar":"B","conectar":"B",
+  "articular":"B","calibrar":"B","afinar":"B","traçar":"B","inscrever":"B",
+  "percorrer":"B","gesticular":"B",
+  // C — Thinking Creatively
+  "transformar":"C","recompor":"C","reorganizar":"C","fragmentar":"C",
+  "recombinar":"C","agrupar":"C","dispersar":"C","deformar":"C",
+  "distorcer":"C","dissolver":"C","fundir":"C","desgastar":"C",
+  "corroer":"C","quebrar":"C","interromper":"C","alterar":"C",
+  "tensionar":"C","desestabilizar":"C","revelar":"C","ocultar":"C",
+  "sugerir":"C","simular":"C","repetir":"C","prolongar":"C","inverter":"C",
+  "combinar":"C","derivar":"C","vagar":"C","pulsar":"C","brotar":"C",
+  "hesitar":"C","abandonar":"C","errar":"C","recomeçar":"C",
+  "experimentar":"C","testar":"C","apropriar":"C",
+  // D — Responding
+  "refletir":"D","perceber":"D","contemplar":"D","apreciar":"D",
+  "observar":"D","escutar":"D","ressignificar":"D","dialogar":"D",
+  "problematizar":"D","homenagear":"D","contrastar":"D","intensificar":"D",
+  "qualificar":"D","concluir":"D","circular":"D","posicionar":"D",
+};
+
+const INTENCAO_CONCEITO: Record<string, string> = {
+  "memória":"Identity","tempo":"Time, Place and Space","corpo":"Identity",
+  "erro":"Change","natureza":"Connections","identidade":"Identity",
+  "pertencimento":"Communities","silêncio":"Aesthetics","fronteira":"Perspective",
+  "rastro":"Connections","peso":"Form","ausência":"Aesthetics",
+  "transformação":"Change","herança":"Culture","ruptura":"Change",
+  "desejo":"Perspective","resistência":"Perspective","origem":"Culture",
+  "limite":"Form","equilíbrio":"Aesthetics","vazio":"Aesthetics",
+  "superfície":"Form","dentro e fora":"Relationships","o que não se vê":"Perspective",
+  "o que não se diz":"Communication","cicatriz":"Identity","movimento":"Change",
+  "permanência":"Time, Place and Space","invisível":"Perspective",
+  "cotidiano":"Communities","afeto":"Relationships","estranhamento":"Perspective",
+  "passagem":"Time, Place and Space","escuta":"Communication",
+  "espera":"Time, Place and Space","crescimento":"Change","fragmento":"Form",
+  "contato":"Relationships","distância":"Connections","recomeço":"Change",
+  "o que sobra":"Aesthetics","o que falta":"Form","presença":"Identity",
+  "mapa":"Connections","território":"Communities",
+};
+
+const CRITERIO_INFO = {
+  A: { label: "Criterion A", nome: "Knowing & Understanding", cor: "#118AB2" },
+  B: { label: "Criterion B", nome: "Developing Skills",       cor: "#FF9500" },
+  C: { label: "Criterion C", nome: "Thinking Creatively",     cor: "#06D6A0" },
+  D: { label: "Criterion D", nome: "Responding",              cor: "#9B5DE5" },
+};
+
+function getATLSkills(criterio: "A"|"B"|"C"|"D"): string[] {
+  if (criterio === "A") return ["Research Skills", "Critical Thinking Skills"];
+  if (criterio === "B") return ["Transfer Skills", "Reflection Skills"];
+  if (criterio === "C") return ["Creative Thinking Skills", "Reflection Skills"];
+  return ["Communication Skills", "Self-Management Skills"];
+}
+
 // ─── TIPOS ────────────────────────────────────────────────────────────────────
 
 type Foco = "artesvisuais" | "ceramica" | "desenho" | "crazy";
@@ -150,6 +216,9 @@ interface Desafio {
   verbo: string; material: string; restricao: string;
   referencia: string; intencao: string;
   duracao: string; formato: string;
+  criterio: "A"|"B"|"C"|"D";
+  keyConcept: string;
+  atlSkills: string[];
 }
 
 // ─── UTILITÁRIOS ──────────────────────────────────────────────────────────────
@@ -241,6 +310,7 @@ export default function ARTbotPage() {
     const verbo = rand(VERBOS);
     const intencao = rand(INTENCOES);
     const restricao = rand(getRestricoes(nivel));
+    const criterio = VERBO_CRITERIO[verbo] ?? "C";
     const novo: Desafio = {
       verbo,
       intencao,
@@ -249,6 +319,9 @@ export default function ARTbotPage() {
       referencia: rand(REFERENCIAS),
       duracao: tempo,
       formato,
+      criterio,
+      keyConcept: INTENCAO_CONCEITO[intencao] ?? "Creativity",
+      atlSkills: getATLSkills(criterio),
     };
     setDesafio(novo);
     setReflexoes(gerarReflexoes(verbo, intencao, restricao));
@@ -344,6 +417,7 @@ export default function ARTbotPage() {
                   </button>
                 </div>
               ) : (
+                <>
                 <div style={{ padding: "28px 28px 0 28px" }}>
                   {/* Elementos com ícones */}
                   <div style={{ display: "flex", flexDirection: "column", gap: 6, marginBottom: 20 }}>
@@ -395,6 +469,34 @@ export default function ARTbotPage() {
                     </span>
                   </div>
                 </div>
+
+                {/* SEÇÃO MYP */}
+                <div style={{ backgroundColor: "#F4F6FF", borderTop: `1px solid ${S.borda}`, padding: "16px 28px" }}>
+                  <p style={{ ...S.label, color: S.suave, textTransform: "uppercase", marginBottom: 10, letterSpacing: "0.12em", fontSize: "0.6rem", fontFamily: "Georgia, serif" }}>
+                    IB MYP Arts
+                  </p>
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: 8, alignItems: "center" }}>
+                    {/* Criterion badge */}
+                    <span style={{ backgroundColor: CRITERIO_INFO[desafio.criterio].cor, color: "#fff", borderRadius: 6, padding: "4px 12px", fontSize: "0.72rem", fontWeight: 700, fontFamily: "sans-serif" }}>
+                      {CRITERIO_INFO[desafio.criterio].label}
+                    </span>
+                    <span style={{ color: CRITERIO_INFO[desafio.criterio].cor, fontSize: "0.78rem", fontWeight: 600, fontFamily: "sans-serif" }}>
+                      {CRITERIO_INFO[desafio.criterio].nome}
+                    </span>
+                    <span style={{ color: S.borda, fontSize: "1rem" }}>·</span>
+                    {/* Key Concept */}
+                    <span style={{ border: `1.5px solid ${S.roxo}`, color: S.roxo, borderRadius: 20, padding: "3px 10px", fontSize: "0.7rem", fontFamily: "sans-serif" }}>
+                      Key Concept: {desafio.keyConcept}
+                    </span>
+                    {/* ATL Skills */}
+                    {desafio.atlSkills.map((s, i) => (
+                      <span key={i} style={{ border: `1.5px solid ${S.verde}`, color: S.verde, borderRadius: 20, padding: "3px 10px", fontSize: "0.7rem", fontFamily: "sans-serif" }}>
+                        ATL: {s}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                </>
               )}
 
               {/* Barra de ações */}
