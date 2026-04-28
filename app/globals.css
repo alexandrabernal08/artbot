@@ -1,26 +1,71 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #1A1209;
+  --oliva: #B1B209;
+  --terracota: #C87941;
+  --creme: #F5EFE6;
+  --creme-dim: #C4BAB0;
+  --card-bg: #241A0E;
+  --border: #3A2E20;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg);
+  color: var(--creme);
+  font-family: Georgia, "Times New Roman", serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scrollbar discreta */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 2px;
+}
+
+/* Animação de entrada do desafio */
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.desafio-enter {
+  animation: fadeSlideIn 0.4s ease-out forwards;
+}
+
+/* Animação do botão ao copiar */
+@keyframes pulse-green {
+  0%   { box-shadow: 0 0 0 0 rgba(177, 178, 9, 0.5); }
+  70%  { box-shadow: 0 0 0 8px rgba(177, 178, 9, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(177, 178, 9, 0); }
+}
+
+.btn-copiado {
+  animation: pulse-green 0.5s ease-out;
 }
