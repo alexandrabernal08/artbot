@@ -942,7 +942,7 @@ export default function ARTbotPage() {
           <span style={{ color: S.medio }}> — Gerador de Desafios Artísticos</span>
         </p>
         <p style={{ color: S.suave, fontSize: "0.7rem", marginTop: 4, fontStyle: "italic" }}>
-          Barro na Veia · Escola de cerâmica · Uma ferramenta para provocar a criação, a investigação e a autoria.
+          desenvolvido por Alexandra Prasinos Bernal
         </p>
       </footer>
 
