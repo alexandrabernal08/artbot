@@ -206,6 +206,295 @@ function getATLSkills(criterio: "A"|"B"|"C"|"D"): string[] {
   return ["Communication Skills", "Self-Management Skills"];
 }
 
+// ─── ARTISTAS ────────────────────────────────────────────────────────────────
+
+interface Obra {
+  titulo: string;
+  ano: string;
+  material: string;
+  local?: string;
+}
+
+interface ArtistaInfo {
+  bio: string;
+  obras: Obra[];
+}
+
+const ARTISTAS_INFO: Record<string, ArtistaInfo> = {
+  "Lucie Rie": {
+    bio: "Ceramista austríaca radicada em Londres (1902–1995), conhecida por vasos de forma precisa e esmaltes inovadores. Influenciada pelo Bauhaus, criou uma obra que une rigor formal e delicadeza poética, redefinindo o vocabulário da cerâmica moderna.",
+    obras: [
+      { titulo: "Fluted Bowl", ano: "c. 1970", material: "porcelana com esmalte branco", local: "Victoria and Albert Museum, Londres" },
+      { titulo: "Bottle", ano: "c. 1978", material: "grés com esmalte sgraffito", local: "coleções diversas no Reino Unido" },
+      { titulo: "Shallow Bowl", ano: "c. 1960", material: "grés com esmalte de pó de bronze", local: "Sainsbury Centre for Visual Arts, Norwich" },
+    ],
+  },
+  "Peter Voulkos": {
+    bio: "Ceramista americano (1924–2002) que incorporou o Expressionismo Abstrato à cerâmica, quebrando a separação entre arte e artesanato. Suas esculturas monumentais em grés são marcadas por gestos físicos intensos e superfícies rústicas e expressivas.",
+    obras: [
+      { titulo: "Rocking Pot", ano: "1956", material: "grés", local: "Oakland Museum of California" },
+      { titulo: "Little Big Horn", ano: "1959", material: "grés com esmalte", local: "Oakland Museum of California" },
+      { titulo: "Stack", ano: "1980", material: "cerâmica com engobe", local: "Los Angeles County Museum of Art" },
+    ],
+  },
+  "Magdalene Odundo": {
+    bio: "Ceramista queniana-britânica (n. 1950) que constrói vasos sem torno, coiling e burnishing à mão em diálogo com tradições cerâmicas africanas e pré-colombianas. Suas formas evocam o corpo humano com elegância e presença escultural.",
+    obras: [
+      { titulo: "Untitled", ano: "1989", material: "terracota burnished, queima em atmosfera redutora" },
+      { titulo: "Asymmetric Vessel", ano: "1994", material: "terracota burnished", local: "Victoria and Albert Museum, Londres" },
+      { titulo: "The Journey IV", ano: "2019", material: "grés polido à mão", local: "Solomon R. Guggenheim Museum, Nova York" },
+    ],
+  },
+  "Edmund de Waal": {
+    bio: "Ceramista e escritor britânico (n. 1964), famoso pelo livro 'A Lebre com Olhos de Âmbar' e por instalações de centenas de vasos de porcelana branca. Sua obra explora memória, herança familiar e o poder silencioso dos objetos acumulados.",
+    obras: [
+      { titulo: "the sea, the sea (instalação de 425 vasos)", ano: "2011", material: "porcelana, ouro e platina", local: "Frick Collection, Nova York" },
+      { titulo: "during the night (instalação)", ano: "2014", material: "porcelana", local: "Gagosian Gallery, Nova York" },
+      { titulo: "Psalm (instalação)", ano: "2021", material: "porcelana em caixas de zinco", local: "coleções internacionais" },
+    ],
+  },
+  "Betty Woodman": {
+    bio: "Ceramista americana (1930–2018) que transformou a jarra e o vaso em escultura pictórica vibrante. Sua obra une técnicas tradicionais da cerâmica ao expressionismo da pintura, criando peças ao mesmo tempo funcionais e escultóricas.",
+    obras: [
+      { titulo: "Pillow Pitcher (série)", ano: "1980s", material: "cerâmica esmaltada pintada", local: "Metropolitan Museum of Art, Nova York" },
+      { titulo: "Naples Yellow (série)", ano: "1999", material: "cerâmica com esmalte e óleo sobre tela" },
+      { titulo: "Bedroom Mazurka", ano: "2000", material: "cerâmica com esmalte e acrílica", local: "Wadsworth Atheneum Museum of Art, Hartford" },
+    ],
+  },
+  "Akio Takamori": {
+    bio: "Ceramista japonês-americano (1950–2017) que pintava figuras humanas expressivas sobre formas de argila, unindo tradição cerâmica japonesa e sensibilidade narrativa ocidental. Suas peças falam sobre identidade, deslocamento e intimidade.",
+    obras: [
+      { titulo: "Sleep", ano: "1990s", material: "grés com engobe pintado", local: "coleções privadas e museus dos EUA" },
+      { titulo: "Boy and Girl", ano: "2000", material: "grés com esmalte e engobe" },
+      { titulo: "After Lunch (série)", ano: "2010s", material: "grés com engobe" },
+    ],
+  },
+  "Rosa Veloso": {
+    bio: "Ceramista brasileira cuja obra articula tradições da cerâmica popular e vocabulário contemporâneo. Em seu trabalho, argila e esmalte são meios para explorar memória, identidade e a expressão do cotidiano.",
+    obras: [
+      { titulo: "Série de vasos com superfície texturizada", ano: "anos 2000", material: "grés com esmalte" },
+      { titulo: "Peças escultóricas em argila", ano: "anos 2010", material: "cerâmica com engobe" },
+      { titulo: "Trabalhos em cerâmica de alta temperatura", ano: "anos 2010–2020", material: "grés, Cone 6–10" },
+    ],
+  },
+  "Francisco Brennand": {
+    bio: "Ceramista e artista plástico pernambucano (1927–2019) que construiu um universo simbólico único, mesclando mitologia, erotismo e natureza. Criou a Oficina Cerâmica Francisco Brennand no Recife — um dos maiores complexos culturais do Brasil, com mais de 2.000 esculturas.",
+    obras: [
+      { titulo: "O Mensageiro", ano: "s.d.", material: "cerâmica monumental pintada", local: "Oficina Cerâmica Francisco Brennand, Recife" },
+      { titulo: "Série Mulheres", ano: "décadas de 1960–2000", material: "cerâmica esmaltada", local: "Oficina Cerâmica Francisco Brennand, Recife" },
+      { titulo: "Painel Cerâmico do Aeroporto de Recife", ano: "1997", material: "cerâmica policromada", local: "Aeroporto Internacional do Recife" },
+    ],
+  },
+  "Jô Vasconcellos": {
+    bio: "Ceramista brasileira contemporânea que une processos artesanais e investigação conceitual na construção de formas cerâmicas. Seu trabalho explora o corpo, a feminilidade e a memória por meio da argila.",
+    obras: [
+      { titulo: "Série de esculturas em grés", ano: "anos 2000–2010", material: "grés com esmalte" },
+      { titulo: "Instalação cerâmica", ano: "anos 2010", material: "cerâmica e objetos combinados" },
+      { titulo: "Vasos escultóricos", ano: "anos 2010–2020", material: "cerâmica de alta temperatura" },
+    ],
+  },
+  "Ceramistas Karajá": {
+    bio: "Os Karajá habitam as margens do Rio Araguaia (GO/TO/PA/MT) e produzem as 'bonecas Ritxoko' — estatuetas de cerâmica que representam mulheres com adornos tradicionais. Patrimônio imaterial do Brasil desde 2012, as Ritxoko são transmitidas de mãe para filha há séculos.",
+    obras: [
+      { titulo: "Ritxoko (boneca cerâmica feminina)", ano: "tradição viva, séc. XIX–XXI", material: "argila local queimada e pintada com urucum e jenipapo", local: "Museu do Índio, Rio de Janeiro e Brasília" },
+      { titulo: "Estatueta ritual masculina", ano: "tradição viva", material: "argila e pigmentos naturais", local: "coleções de museus etnográficos brasileiros" },
+      { titulo: "Coleção de Ritxoko históricas", ano: "séc. XIX–XX", material: "cerâmica pintada", local: "Museu Nacional (RJ) — parte destruída no incêndio de 2018" },
+    ],
+  },
+  "Cerâmica Jomon": {
+    bio: "A cerâmica Jōmon (c. 10.500–300 a.C.) é uma das mais antigas do mundo, produzida pelos povos pré-históricos do Japão. Seus vasos com marcas de corda e bordas flamejantes uniam função e expressão estética de forma pioneira há milênios.",
+    obras: [
+      { titulo: "Vaso de Chama (Kaen-doki)", ano: "c. 3000–2000 a.C.", material: "argila cozida com textura de corda", local: "Museu Nacional de Tóquio" },
+      { titulo: "Figurina Dogū feminina", ano: "c. 3000–2000 a.C.", material: "cerâmica", local: "Museu Nacional de Tóquio" },
+      { titulo: "Vaso com decoração Jōmon", ano: "c. 5000 a.C.", material: "argila com marcas de corda trançada", local: "coleções de museus japoneses" },
+    ],
+  },
+  "Cerâmica Marajoara": {
+    bio: "A cerâmica Marajoara (c. 400–1300 d.C.) foi produzida na ilha de Marajó (PA) e é uma das expressões mais sofisticadas da arte pré-colombiana nas Américas. Seus grafismos geométricos elaborados em vermelho e preto sobre fundo branco distinguem urnas funerárias, pratos e estatuetas.",
+    obras: [
+      { titulo: "Urna funerária Marajoara", ano: "c. 400–1300 d.C.", material: "cerâmica polícroma pintada", local: "Museu do Marajó e Museu Paraense Emílio Goeldi, Belém" },
+      { titulo: "Prato com grafismos geométricos", ano: "c. 400–1300 d.C.", material: "cerâmica pintada com engobes coloridos", local: "Museu Paraense Emílio Goeldi, Belém" },
+      { titulo: "Estatueta feminina", ano: "c. 400–1300 d.C.", material: "cerâmica pintada", local: "Museu Nacional (RJ) e coleções diversas" },
+    ],
+  },
+  "Tarsila do Amaral": {
+    bio: "Pintora brasileira (1886–1973), ícone do Modernismo e co-fundadora do movimento Antropofágico. Suas obras sintetizam estética europeia e iconografia brasileira, criando uma linguagem visual que se tornou símbolo da identidade cultural do país.",
+    obras: [
+      { titulo: "Abaporu", ano: "1928", material: "óleo sobre tela", local: "MALBA — Museu de Arte Latino-Americana, Buenos Aires" },
+      { titulo: "Operários", ano: "1933", material: "óleo sobre tela", local: "Acervo Artístico-Cultural dos Palácios do Governo do Estado de SP" },
+      { titulo: "A Cuca", ano: "1924", material: "óleo sobre tela", local: "Neue Nationalgalerie, Berlim" },
+    ],
+  },
+  "Hélio Oiticica": {
+    bio: "Artista carioca (1937–1980) que expandiu os limites da arte, passando da pintura construtivista a instalações participativas, parangolés e ambientes imersivos. Pioneiro da arte sensorial e participativa, influenciou gerações no Brasil e no mundo.",
+    obras: [
+      { titulo: "Parangolé P4 Cape 1", ano: "1964", material: "tecido e tintas", local: "MAM Rio de Janeiro e coleções internacionais" },
+      { titulo: "Tropicália (instalação)", ano: "1967", material: "madeira, areia, plantas e tecidos", local: "Projeto Hélio Oiticica, Rio de Janeiro" },
+      { titulo: "Metaesquema", ano: "1957–58", material: "guache sobre cartão", local: "coleções diversas, incluindo MoMA Nova York" },
+    ],
+  },
+  "Lygia Clark": {
+    bio: "Artista mineira (1920–1988) que transformou a relação entre obra e espectador — das pinturas neoconcretistas a 'objetos relacionais' terapêuticos. Sua obra propõe a participação ativa do corpo e a dissolução das fronteiras entre arte e vida.",
+    obras: [
+      { titulo: "Bicho", ano: "1960", material: "alumínio articulado", local: "coleção Família Clark e museus internacionais" },
+      { titulo: "O Eu e o Tu — Roupa-corpo-roupa", ano: "1967", material: "roupa sensorial em borracha e tecido", local: "museus e coleções diversas" },
+      { titulo: "Caminhando", ano: "1963", material: "fita de papel e tesoura (obra-instrução participativa)" },
+    ],
+  },
+  "Arthur Bispo do Rosário": {
+    bio: "Artista brasileiro (c. 1909–1989) que passou décadas internado na Colônia Juliano Moreira (RJ), onde criou bordados e mantos catalogando obsessivamente o mundo. Sua obra é hoje reconhecida como uma das mais importantes da arte brasileira do século XX.",
+    obras: [
+      { titulo: "Manto da Apresentação", ano: "c. 1980s", material: "bordado em tecido azul com fios e objetos", local: "Museu Bispo do Rosário Arte Contemporânea, Rio de Janeiro" },
+      { titulo: "Navio", ano: "s.d.", material: "madeira, tecidos bordados e fios", local: "Museu Bispo do Rosário Arte Contemporânea, Rio de Janeiro" },
+      { titulo: "Eu Vim ao Mundo (estandarte)", ano: "s.d.", material: "bordado e objetos costurados em tecido", local: "Museu Bispo do Rosário Arte Contemporânea, Rio de Janeiro" },
+    ],
+  },
+  "Cândido Portinari": {
+    bio: "Pintor brasileiro (1903–1962) que documentou o povo com força expressiva — retirantes, trabalhadores, crianças e festas populares. Seus murais e telas estão entre as obras mais significativas da arte brasileira do século XX.",
+    obras: [
+      { titulo: "Retirantes", ano: "1944", material: "óleo sobre tela", local: "MASP — Museu de Arte de São Paulo" },
+      { titulo: "Guerra e Paz (dois painéis)", ano: "1956", material: "afresco sobre painel", local: "Sede da ONU, Nova York" },
+      { titulo: "Café", ano: "1935", material: "óleo sobre tela", local: "Museu Nacional de Belas Artes, Rio de Janeiro" },
+    ],
+  },
+  "Anna Maria Maiolino": {
+    bio: "Artista ítalo-brasileira (n. 1942) que une performance, fotografia, vídeo e cerâmica na investigação de memória, migração e o corpo. Seus trabalhos com argila exploram a repetição gestual como linguagem poética e política.",
+    obras: [
+      { titulo: "Por um Fio", ano: "1976", material: "fotoperformance", local: "acervo MAM São Paulo" },
+      { titulo: "Entrevidas", ano: "1981", material: "fotoperformance (ovos sobre piso)", local: "acervo MAM São Paulo" },
+      { titulo: "Aqui e Lá (instalação)", ano: "1995–2000s", material: "argila crua em rolos e bolinhas", local: "MoMA Nova York, Tate Modern e outros" },
+    ],
+  },
+  "Vik Muniz": {
+    bio: "Artista paulistano (n. 1961) radicado em Nova York, famoso por recriar imagens icônicas com materiais inusitados — chocolate, lixo, açúcar, diamantes. Seu processo de criar, fotografar e destruir questiona o valor da imagem e o papel da ilusão na arte.",
+    obras: [
+      { titulo: "Marat (Sebastião) — série Pictures of Garbage", ano: "2008", material: "fotografia (feita com lixo)", local: "coleções internacionais" },
+      { titulo: "Cleo — série Pictures of Chocolate", ano: "1997", material: "fotografia (feita com calda de chocolate)" },
+      { titulo: "Double Mona Lisa — série Pictures of Diamonds", ano: "1999", material: "fotografia (feita com diamantes)" },
+    ],
+  },
+  "Adriana Varejão": {
+    bio: "Artista carioca (n. 1964) que usa o azulejo português como suporte para investigar colonização, miscigenação e violência na história do Brasil. Suas obras evocam corpos, carne e arquitetura de forma perturbadora e poética.",
+    obras: [
+      { titulo: "Proposta para uma Catequese", ano: "1994", material: "óleo sobre tela e MDF recortado" },
+      { titulo: "Ruína de São Francisco Xavier", ano: "1992", material: "azulejo e óleo sobre tela" },
+      { titulo: "Celacanto Provoca Maremoto (instalação)", ano: "2004–2008", material: "azulejos em trompe l'oeil com fissuras", local: "Instituto Inhotim, Brumadinho, MG" },
+    ],
+  },
+  "Rosana Paulino": {
+    bio: "Artista paulistana (n. 1967) que investiga as marcas da escravidão no corpo e na identidade da mulher negra brasileira. Usando costura, bordado, impressão e fotografia, cria obras que confrontam apagamentos históricos com urgência poética.",
+    obras: [
+      { titulo: "Parede da Memória", ano: "1994/2015", material: "instalação com fotografias, tecido e linha", local: "Museu Afro Brasil, São Paulo" },
+      { titulo: "As Filhas de Eva", ano: "1997", material: "gravura e bordado" },
+      { titulo: "Sutura", ano: "1997", material: "fotografia e bordado sobre papel", local: "Museu Afro Brasil, São Paulo" },
+    ],
+  },
+  "Erika Verzutti": {
+    bio: "Artista paulistana (n. 1971) cujas esculturas fundem formas orgânicas — frutas, animais, plantas — com referências da história da arte ocidental. Trabalha com cerâmica, bronze e papier-mâché, criando objetos que transitam entre o familiar e o estranho.",
+    obras: [
+      { titulo: "Caju", ano: "2010", material: "bronze e cerâmica" },
+      { titulo: "Crocodilo", ano: "2012", material: "bronze e cerâmica pintada" },
+      { titulo: "Instalação na 29ª Bienal de São Paulo", ano: "2010", material: "cerâmica e bronze", local: "Bienal de São Paulo" },
+    ],
+  },
+  "Almandrade": {
+    bio: "Artista baiano (n. 1951) que articula poesia visual, pintura e instalação, investigando a linguagem como sistema de signos. Transita entre o Concretismo brasileiro e a arte conceitual contemporânea, com obras que exigem a participação ativa do leitor-espectador.",
+    obras: [
+      { titulo: "Série de pinturas com signos e letras", ano: "1970s–2000s", material: "óleo sobre tela", local: "Museu de Arte Moderna da Bahia, Salvador" },
+      { titulo: "Poemas visuais (série)", ano: "1970s–presente", material: "tinta sobre papel e tela" },
+      { titulo: "Instalações poético-visuais", ano: "2000s–presente", material: "objetos, texto e luz", local: "exposições no Brasil e exterior" },
+    ],
+  },
+  "Yayoi Kusama": {
+    bio: "Artista japonesa (n. 1929) que desde os anos 1950 explora obsessivamente o padrão de bolinhas como forma de autoapagamento e de infinito. Sobrevivente de trauma e pioneira da arte conceitual e da performance, com obra que vai de pinturas a instalações imersivas mundialmente conhecidas.",
+    obras: [
+      { titulo: "Infinity Mirror Room — Phalli's Field", ano: "1965", material: "instalação com espelhos e formas de tecido preenchido" },
+      { titulo: "Pumpkin (escultura)", ano: "1994", material: "fibra de vidro e esmalte amarelo com bolinhas pretas", local: "Benesse Art Site, Naoshima, Japão" },
+      { titulo: "Dots Obsession (instalação)", ano: "2002–presente", material: "balões e adesivos de bolinhas", local: "museus e galerias em todo o mundo" },
+    ],
+  },
+  "Louise Bourgeois": {
+    bio: "Artista franco-americana (1911–2010) que transformou trauma, memória e o corpo em esculturas de grande escala e instalações perturbadoras. Sua aranha gigante 'Maman' é um dos ícones incontornáveis da arte do século XX.",
+    obras: [
+      { titulo: "Maman", ano: "1999", material: "aço inoxidável e mármore", local: "Museu Guggenheim, Bilbao; National Gallery of Canada, Ottawa; e outras coleções" },
+      { titulo: "Cell (You Better Grow Up)", ano: "1993", material: "instalação com vidro, mármore, cerâmica e metal", local: "MoMA, Nova York" },
+      { titulo: "The Destruction of the Father", ano: "1974", material: "látex, plástico, madeira e tecido" },
+    ],
+  },
+  "Kara Walker": {
+    bio: "Artista americana (n. 1969) que usa silhuetas em papel recortado para narrar a história da escravidão e do racismo nos EUA com brutalidade poética. Suas obras provocadoras são fundamentais para entender raça, gênero e poder na arte contemporânea.",
+    obras: [
+      { titulo: "Gone: An Historical Romance... (mural de 8,5 m)", ano: "1994", material: "silhuetas em papel recortado coladas na parede" },
+      { titulo: "A Subtlety (obra efêmera)", ano: "2014", material: "instalação em açúcar e melaço", local: "Domino Sugar Refinery, Brooklyn (demolida)" },
+      { titulo: "Fons Americanus (escultura de 13 m)", ano: "2019", material: "escultura em cortiça pintada", local: "Tate Modern, Londres" },
+    ],
+  },
+  "Jean-Michel Basquiat": {
+    bio: "Artista nova-iorquino (1960–1988) de origem haitiana-porto-riquenha que emergiu do grafite para o mercado internacional de arte. Suas pinturas combinam texto, símbolo, anatomia e crítica racial com energia expressionista urgente e incontrolável.",
+    obras: [
+      { titulo: "Untitled (Skull)", ano: "1981", material: "acrílica e bastão de óleo sobre tela", local: "The Broad, Los Angeles" },
+      { titulo: "Hollywood Africans", ano: "1983", material: "acrílica e bastão de óleo sobre tela", local: "Whitney Museum of American Art, Nova York" },
+      { titulo: "Irony of Negro Policeman", ano: "1981", material: "acrílica sobre tela", local: "coleção privada" },
+    ],
+  },
+  "Barbara Kruger": {
+    bio: "Artista americana (n. 1945) que usa a estética da publicidade — texto em negrito sobre fotos em preto e branco — para criticar poder, gênero e consumismo. Seu estilo inconfundível influenciou décadas de design gráfico e arte política.",
+    obras: [
+      { titulo: "Untitled (Your Body is a Battleground)", ano: "1989", material: "fotografia e serigrafia", local: "Broad Art Foundation e coleções internacionais" },
+      { titulo: "Untitled (I Shop Therefore I Am)", ano: "1987", material: "fotografia serigrafada sobre vinil" },
+      { titulo: "Untitled (We Don't Need Another Hero)", ano: "1987", material: "fotografia serigrafada" },
+    ],
+  },
+  "Andy Goldsworthy": {
+    bio: "Artista britânico (n. 1956) que cria esculturas efêmeras diretamente na natureza usando folhas, pedras, gelo e galhos — sem cola nem tinta industrial. Fotografa o processo e o desaparecimento das obras, tornando o tempo um elemento central da arte.",
+    obras: [
+      { titulo: "Rowan Leaves and Hole", ano: "1987", material: "folhas de freixo sobre pedra (efêmero, documentado em fotografia)" },
+      { titulo: "Storm King Wall (292 m)", ano: "1997–98", material: "muro de pedra seca sinuoso", local: "Storm King Art Center, Nova York" },
+      { titulo: "Balanced Rocks (série)", ano: "1978–presente", material: "pedras equilibradas na natureza (efêmero)" },
+    ],
+  },
+  "Arte indígena brasileira": {
+    bio: "As tradições visuais e materiais dos povos originários do Brasil abrangem cerâmica, tecelagem, grafismo corporal e plumária, cada povo com linguagem visual própria. São sistemas estéticos vivos que articulam cosmologia, identidade e relação com o território.",
+    obras: [
+      { titulo: "Grafismo corporal Kayapó", ano: "tradição viva", material: "pintura com jenipapo e urucum sobre o corpo", local: "Pará e Mato Grosso" },
+      { titulo: "Kusiwa — arte gráfica Wajãpi (Patrimônio Imaterial UNESCO, 2003)", ano: "tradição viva", material: "desenho com jenipapo sobre pele, tecido e cerâmica", local: "Amapá" },
+      { titulo: "Cestaria Yanomami", ano: "tradição viva", material: "palha trançada com pigmentos naturais", local: "Amazônia venezuelana e brasileira" },
+    ],
+  },
+  "Wabi-sabi japonês": {
+    bio: "Filosofia estética japonesa que encontra beleza na imperfeição, impermanência e incompletude. Na cerâmica, manifesta-se em peças rústicas, assimétricas, com marcas visíveis do tempo e do fogo — como nas tradições Raku e Bizen.",
+    obras: [
+      { titulo: "Tigela Raku (Cha-wan)", ano: "séc. XVI–presente", material: "cerâmica construída à mão, queima rápida em baixa temperatura", local: "Museu Raku, Kyoto" },
+      { titulo: "Cerâmica Bizen (Bizen-yaki)", ano: "séc. XII–presente", material: "grés sem esmalte, marcas de cinza e fogo", local: "Prefeitura de Okayama, Japão" },
+      { titulo: "Kintsukuroi (vaso reparado com ouro)", ano: "séc. XVI–presente", material: "cerâmica quebrada reparada com laca e ouro em pó", local: "coleções de museus japoneses e internacionais" },
+    ],
+  },
+  "Arte Povera italiana": {
+    bio: "Movimento italiano (anos 1960–70) que rejeitou os materiais nobres em favor de elementos cotidianos e 'pobres' — pedra, terra, madeira, vidro, pano. Artistas como Jannis Kounellis, Mario Merz e Michelangelo Pistoletto questionavam o consumismo e o sistema da arte.",
+    obras: [
+      { titulo: "Untitled (12 Horses) — Jannis Kounellis", ano: "1969", material: "cavalos vivos instalados em galeria (obra efêmera)", local: "Galleria L'Attico, Roma" },
+      { titulo: "Igloo di Giap — Mario Merz", ano: "1968", material: "canos de metal, argila e neon", local: "Galleria Sperone, Turin" },
+      { titulo: "Venere degli Stracci — Michelangelo Pistoletto", ano: "1967", material: "escultura de mármore e pilha de trapos coloridos", local: "Tate Modern, Londres e coleções internacionais" },
+    ],
+  },
+  "Fluxus": {
+    bio: "Movimento internacional (anos 1960–70) que mesclou artes visuais, música e performance de forma radical e bem-humorada. Yoko Ono, Nam June Paik e Joseph Beuys foram participantes; o Fluxus valorizava o processo, o acidente e a participação do público.",
+    obras: [
+      { titulo: "Grapefruit (livro de instruções) — Yoko Ono", ano: "1964", material: "publicação com instruções para obras realizadas pelo leitor" },
+      { titulo: "TV Buddha — Nam June Paik", ano: "1974", material: "escultura de Buda diante de câmera e monitor em circuito fechado", local: "Stedelijk Museum, Amsterdã" },
+      { titulo: "I Like America and America Likes Me — Joseph Beuys", ano: "1974", material: "performance com coiote vivo por 3 dias (obra efêmera)", local: "René Block Gallery, Nova York" },
+    ],
+  },
+  "Grafite e muralismo brasileiro": {
+    bio: "O grafite e muralismo urbano brasileiro têm raízes na pichação dos anos 1980 e cresceram para uma linguagem visual sofisticada internacionalmente reconhecida. São Paulo é uma das capitais mundiais do grafite, com artistas como Os Gêmeos, Eduardo Kobra e Cranio.",
+    obras: [
+      { titulo: "Voodoo Doll — Os Gêmeos", ano: "2013", material: "spray sobre parede (mural)", local: "Nova York, EUA" },
+      { titulo: "Etnias — Eduardo Kobra (3.000 m²)", ano: "2016", material: "tinta spray sobre parede", local: "Zona Portuária, Rio de Janeiro" },
+      { titulo: "Índio Azul (série de murais) — Cranio", ano: "2010s–presente", material: "spray sobre muros", local: "São Paulo e cidades do mundo" },
+    ],
+  },
+};
+
 // ─── TIPOS ────────────────────────────────────────────────────────────────────
 
 type Foco = "artesvisuais" | "ceramica" | "desenho" | "crazy";
@@ -339,6 +628,8 @@ export default function ARTbotPage() {
   }, [desafio]);
 
   const handleImprimir = useCallback(() => { if (desafio) window.print(); }, [desafio]);
+
+  const artistaInfo = desafio ? (ARTISTAS_INFO[desafio.referencia] ?? null) : null;
 
   // Estilos reutilizáveis
   const S = {
@@ -517,7 +808,7 @@ export default function ARTbotPage() {
 
             {/* PARA REFLETIR */}
             {desafio && reflexoes.length > 0 && (
-              <div style={{ backgroundColor: S.card, border: `1px solid ${S.borda}`, borderRadius: 16, padding: 24 }}>
+              <div style={{ backgroundColor: S.card, border: `1px solid ${S.borda}`, borderRadius: 16, padding: 24, marginBottom: 16 }}>
                 <h3 style={{ color: S.texto, fontSize: "0.85rem", fontWeight: 700, marginBottom: 12, letterSpacing: "0.05em" }}>
                   Para refletir
                 </h3>
@@ -528,6 +819,53 @@ export default function ARTbotPage() {
                       <li key={i} style={{ color: S.medio, fontSize: "0.85rem", lineHeight: 1.6, display: "flex", gap: 8 }}>
                         <span style={{ color: pontinhos[i % pontinhos.length], flexShrink: 0, fontWeight: 700 }}>•</span>
                         {r}
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            )}
+
+            {/* SOBRE A REFERÊNCIA */}
+            {desafio && artistaInfo && (
+              <div style={{ backgroundColor: S.card, border: `1px solid ${S.borda}`, borderRadius: 16, padding: 24 }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 14 }}>
+                  <div style={{ color: S.azul }}><IconReferencia /></div>
+                  <h3 style={{ color: S.texto, fontSize: "0.85rem", fontWeight: 700, letterSpacing: "0.05em", margin: 0 }}>
+                    Sobre a referência
+                  </h3>
+                </div>
+
+                <p style={{ color: S.azul, fontSize: "1rem", fontWeight: 700, fontStyle: "italic", marginBottom: 10 }}>
+                  {desafio.referencia}
+                </p>
+
+                <p style={{ color: S.medio, fontSize: "0.83rem", lineHeight: 1.75, marginBottom: 18 }}>
+                  {artistaInfo.bio}
+                </p>
+
+                <p style={{ ...S.label, color: S.suave, textTransform: "uppercase", marginBottom: 12, fontSize: "0.6rem" }}>
+                  Obras de referência
+                </p>
+
+                <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 12 }}>
+                  {artistaInfo.obras.map((obra, i) => {
+                    const cores = [S.azul, S.roxo, S.verde];
+                    const cor = cores[i % cores.length];
+                    return (
+                      <li key={i} style={{ display: "flex", gap: 10 }}>
+                        <span style={{ color: cor, flexShrink: 0, fontWeight: 700, fontSize: "1rem", lineHeight: 1.3 }}>●</span>
+                        <div>
+                          <p style={{ color: S.texto, fontSize: "0.83rem", fontWeight: 600, fontStyle: "italic", margin: 0, lineHeight: 1.4 }}>
+                            &ldquo;{obra.titulo}&rdquo;
+                          </p>
+                          <p style={{ color: S.suave, fontSize: "0.75rem", margin: "3px 0 0 0", lineHeight: 1.5 }}>
+                            {obra.ano} · {obra.material}
+                            {obra.local && (
+                              <span style={{ color: S.suave }}> · <em>{obra.local}</em></span>
+                            )}
+                          </p>
+                        </div>
                       </li>
                     );
                   })}
